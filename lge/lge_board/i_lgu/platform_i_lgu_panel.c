@@ -185,9 +185,7 @@ static struct platform_device hdmi_msm_device = {
 
 #ifdef CONFIG_FB_MSM_MIPI_DSI
 
-/* minjong.gong@lge.com, 2011.01.31 - lgit lcd for MWC board*/
 #define LCD_RESET_N		50
-/* minjong.gong@lge.com, 2011.01.31 - lgit lcd for MWC board*/
 
 static void mipi_config_gpio(int on)
 {
@@ -371,7 +369,6 @@ static struct platform_device *panel_devices[] __initdata = {
 
 #ifdef CONFIG_FB_MSM_MIPI_DSI
 
-/* jaeseong.gim@lge.com. 2011-01-16 */
 #ifdef CONFIG_LGE_DISPLAY_MIPI_LGIT_VIDEO_HD_PT
 	&mipi_dsi_lgit_panel_device,
 #else
@@ -387,7 +384,6 @@ static struct platform_device *panel_devices[] __initdata = {
 void __init msm_panel_init(void){
 	platform_add_devices(panel_devices, ARRAY_SIZE(panel_devices));
 }
-//start, linear mode, shoogi.lee@lge.com, 2011_04_20
 struct backlight_platform_data {
    void (*platform_init)(void);
    int gpio;
@@ -979,27 +975,9 @@ static struct lcdc_platform_data dtv_hdmi_prim_pdata = {
 #endif
 
 
-#ifdef CONFIG_FB_MSM_MIPI_DSI
-int mdp_core_clk_rate_table[] = {
-	200000000,
-	200000000,
-	200000000,
-	200000000,
-};
-#else
-int mdp_core_clk_rate_table[] = {
-	59080000,
-	85330000,
-	128000000,
-	200000000,
-};
-#endif
-
 static struct msm_panel_common_pdata mdp_pdata = {
 	.gpio = MDP_VSYNC_GPIO,
-	.mdp_core_clk_rate = 160000000,//59080000,
-	.mdp_core_clk_table = mdp_core_clk_rate_table,
-	.num_mdp_clk = ARRAY_SIZE(mdp_core_clk_rate_table),
+	.mdp_max_clk = 200000000,//59080000,
 #ifdef CONFIG_MSM_BUS_SCALING
 	.mdp_bus_scale_table = &mdp_bus_scale_pdata,
 #endif

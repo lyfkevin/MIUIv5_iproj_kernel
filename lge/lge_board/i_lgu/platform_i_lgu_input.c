@@ -224,7 +224,6 @@ void __init sensor_power_init(void)
 
 }
 
-/* eunmo.yang@lge.com [BSP/Sensor] 20110623 START */
 #ifdef CONFIG_LGE_SENSOR
 uint32_t sensor_pwr_mask = 0;
 static int sensor_common_power_set(unsigned char on, int sensor)
@@ -261,7 +260,6 @@ static int sensor_common_power_set(unsigned char on, int sensor)
 
     return ret;
 }
-/* eunmo.yang@lge.com [BSP/Sensor] 20110623 END */
 
 static int sensor_power_on(int sensor)
 {

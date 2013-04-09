@@ -59,7 +59,6 @@
 
 //#define LGE_AUDIO_COMMENT_OUT_FOR_REFERENCE
 
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, Acoustic Calibration 
 #include <linux/fs.h>
 #include <linux/fcntl.h> 
 #include <linux/string.h>
@@ -201,7 +200,6 @@ typedef struct {
 
 const char* LGE_WM9093_CALIBRATION_TOOL = "wm9093";
 const char* LGE_QTR8615L_CALIBRATION_TOOL = "qtr8615l";
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, Acoustic Calibration 
 
 /* QTR Line ==> WM9093 IN2 ==> SPK */
 static wmCodecCmd seq_lin_to_spkout[] = 
@@ -284,7 +282,6 @@ static wmCodecCmd seq_lin_to_headset_playback[] =
     {0x49, 0x0100}
 };
 
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t simultaneously Ringing Headset and SPK
 /* QTR HPH ==> WM9093 IN1 ==> EAR and SPK */
 static wmCodecCmd seq_lin_to_headset_spkout[] = 
 {
@@ -309,9 +306,7 @@ static wmCodecCmd seq_lin_to_headset_spkout[] =
     {0x46, 0x0100},	
     {0x49, 0x0100}
 };
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t simultaneously Ringing Headset and SPK
 
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t TTY
 /* QTR HPH ==> WM9093 IN1 ==> EAR */
 static wmCodecCmd seq_lin_to_headset_tty[] = 
 {
@@ -332,7 +327,6 @@ static wmCodecCmd seq_lin_to_headset_tty[] =
     {0x46, 0x0100},
     {0x49, 0x0100}
 };
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t TTY
 
 static wmCodecCmd seq_power_down[] = 
 {
@@ -354,7 +348,6 @@ static struct wm9093_platform_data lge_audio_wm9093_platform = {
 		.amp_function_size = ARRAY_SIZE(seq_lin_to_headset),
 	},
 
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t
     .hph_spk_on = { // at&t simultaneously Ringing Headset and SPK
         .amp_function = seq_lin_to_headset_spkout,
         .amp_function_size = ARRAY_SIZE(seq_lin_to_headset_spkout),
@@ -374,7 +367,6 @@ static struct wm9093_platform_data lge_audio_wm9093_platform = {
         .amp_function = seq_lin_to_headset_playback,
         .amp_function_size = ARRAY_SIZE(seq_lin_to_headset_playback),
     },
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t
 	.power_down = {
 		.amp_function = seq_power_down,
 		.amp_function_size = ARRAY_SIZE(seq_power_down),
@@ -394,10 +386,8 @@ static struct i2c_board_info lge_i2c_wm9093_info[] = {
 
 #ifdef CONFIG_DEBUG_FS
 static struct dentry *debugfs_hsed_config;
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t Acoustic Calibration  
 static struct dentry *debugfs_wm9093_cal_tool_config;
 static struct dentry *debugfs_qtr8616l_cal_tool_config;
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t Acoustic Calibration  
 
 static void snddev_hsed_config_modify_setting(int type);
 static void snddev_hsed_config_restore_setting(void);
@@ -736,7 +726,6 @@ static int msm_snddev_poweramp_on_hph_playback(void)
 	return 0;
 }
 
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t simultaneously Ringing Headset and SPK
 static int msm_snddev_poweramp_on_hph_spk(void)
 {
 	pr_debug("%s\n", __func__);
@@ -758,9 +747,7 @@ static void msm_snddev_poweramp_off_hph_spk(void)
 
 	pr_debug("%s\n", __func__);
 }
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t simultaneously Ringing Headset and SPK
 
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t TTY 
 static int msm_snddev_poweramp_on_tty(void)
 {
 	pr_debug("%s\n", __func__);
@@ -782,7 +769,6 @@ static void msm_snddev_poweramp_off_tty(void)
 
 	pr_debug("%s\n", __func__);
 }
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t TTY 
 
 /* Regulator 8058_l10 supplies regulator 8058_ncp. */
 #ifndef CONFIG_LGE_AUDIO_NO_NCP_MODE
@@ -888,7 +874,6 @@ done:
 
 static int msm_snddev_enable_amic_power(void)
 {
-/* sungwoo.cho@lge.com 2011. 01. 26 */
 #ifdef CONFIG_LGE_AUDIO
 	int ret;
 
@@ -910,12 +895,10 @@ static int msm_snddev_enable_amic_power(void)
 #endif
 #endif
 	return 0;
-/* sungwoo.cho@lge.com 2011. 01. 26 */
 }
 
 static void msm_snddev_disable_amic_power(void)
 {
-/* sungwoo.cho@lge.com 2011. 01. 26 */
 #ifdef CONFIG_LGE_AUDIO
 #if 0
 	gpio_set_value_cansleep(GPIO_CAMCORDER_MIC_EN, 0);
@@ -933,7 +916,6 @@ static void msm_snddev_disable_amic_power(void)
 	}
 #endif
 #endif
-/* sungwoo.cho@lge.com 2011. 01. 26 */
 
 }
 
@@ -1464,12 +1446,10 @@ static struct snddev_icodec_data snddev_ispkr_stereo_data = {
 	.default_sample_rate = 48000,
 	.pamp_on = msm_snddev_poweramp_on_spk,
 	.pamp_off = msm_snddev_poweramp_off_spk,
-/* sungwoo.cho@lge.com 2011. 01. 26 */
 #if 0//def CONFIG_LGE_AUDIO_AMP_WM9093
 	.voltage_on = msm_snddev_voltage_on,
 	.voltage_off = msm_snddev_voltage_off,
 #endif
-/* sungwoo.cho@lge.com 2011. 01. 26 */
 };
 
 static struct platform_device msm_ispkr_stereo_device = {
@@ -1488,12 +1468,10 @@ static struct snddev_icodec_data snddev_voip_speaker_rx_data = {
 	.default_sample_rate = 48000,
 	.pamp_on = msm_snddev_poweramp_on_spk,
 	.pamp_off = msm_snddev_poweramp_off_spk,
-/* sungwoo.cho@lge.com 2011. 01. 26 */
 #if 0//def CONFIG_LGE_AUDIO_AMP_WM9093
 	.voltage_on = msm_snddev_voltage_on,
 	.voltage_off = msm_snddev_voltage_off,
 #endif
-/* sungwoo.cho@lge.com 2011. 01. 26 */
 };
 
 static struct platform_device msm_voip_speaker_rx_device = {
@@ -2479,8 +2457,7 @@ static struct platform_device msm_auxpga_lp_hs_device = {
 	.dev = { .platform_data = &snddev_auxpga_lp_hs_data },
 };
 
-#if 1 // SKT merge form GB clkimhj
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t Hearing AID
+#if 1
 static struct adie_codec_action_unit iearpiece_hac_48KHz_osr256_actions[] =
 	HANDSET_RX_MONO_8000_OSR_256_HAC;
 
@@ -2512,7 +2489,6 @@ static struct platform_device msm_iearpiece_hac_device = {
 	.name = "snddev_icodec",
 	.dev = { .platform_data = &snddev_iearpiece_hac_data },
 };
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t Hearing AID
 
 static struct adie_codec_action_unit dual_nc_48KHz_osr256_actions[] =
 	AMIC_DUAL_OSR_256; ///////////////
@@ -4025,7 +4001,6 @@ static const struct file_operations snddev_hsed_config_debug_fops = {
 	.write = snddev_hsed_config_debug_write
 };
 
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t Acoustic Calibration  
 char *strtok_r(char *s, const char *delim, char **last)
 {
     char *spanp;
@@ -4707,7 +4682,6 @@ static const struct file_operations lge_qtr8615l_cal_tool_fops = {
 	.write = lge_qtr8615l_cal_tool_write
 };
 
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t Acoustic Calibration  
 
 #endif
 
@@ -4945,7 +4919,6 @@ void __init msm_snddev_init(void)
 				S_IFREG | S_IRUGO, NULL,
 		(void *) "msm_hsed_config", &snddev_hsed_config_debug_fops);
 
-//LGE_UPDATE_S, jeremy.pi@lge.com, 2011-04-09, at&t Acoustic Calibration 
     debugfs_wm9093_cal_tool_config = debugfs_create_file(LGE_WM9093_CALIBRATION_TOOL,
                 S_IFREG | S_IRUGO, NULL,
                 (void *) LGE_WM9093_CALIBRATION_TOOL, &lge_wm9093_cal_tool_fops);
@@ -4953,6 +4926,5 @@ void __init msm_snddev_init(void)
     debugfs_qtr8616l_cal_tool_config = debugfs_create_file(LGE_QTR8615L_CALIBRATION_TOOL,
                 S_IFREG | S_IRUGO, NULL,
                 (void *) LGE_QTR8615L_CALIBRATION_TOOL, &lge_qtr8615l_cal_tool_fops);
-//LGE_UPDATE_E, jeremy.pi@lge.com, 2011-04-09, at&t Acoustic Calibration 
 #endif
 }

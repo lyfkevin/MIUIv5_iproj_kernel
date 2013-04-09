@@ -17,7 +17,6 @@
  * 02110-1301, USA.
  *
  */
-/* platform.team@lge.com separate panel devices init */
 
 #ifndef __BOARD_I_LGU_H__
 #define __BOARD_I_LGU_H__
@@ -30,7 +29,6 @@ void  msm8x60_mdp_writeback(struct memtype_reserve *reserve_table);
 void __init msm_panel_init(void);
 void __init msm_fb_add_devices(void);
 
-/* jisun.shin@lge.com Camera Platform */
 void __init i2c_register_camera_info(void);
 void __init lge_camera_init(void);
 void __init lge_add_btpower_devices(void);

@@ -21,13 +21,11 @@ static struct gpiomux_setting console_uart = {
 	.pull = GPIOMUX_PULL_NONE,
 };
 
-//bill.jung@lge.com - WiFi GPIO setup
 static struct gpiomux_setting wifi_active = {
 	.func = GPIOMUX_FUNC_1,
 	.drv = GPIOMUX_DRV_2MA,
 	.pull = GPIOMUX_PULL_UP,
 };
-//bill.jung@lge.com - WiFi GPIO setup
 
 
 /* The SPI configurations apply to GSBI1 and GSBI10 */
@@ -400,7 +398,6 @@ static struct gpiomux_setting mdm2ap_vddmin_suspend_cfg = {
 	.drv = GPIOMUX_DRV_2MA,
 	.pull = GPIOMUX_PULL_NONE,
 };
-//20110315, seunghyup.ryoo@lge.com,  [START]
 #if defined(CONFIG_LGE_NFC_NXP_PN544PN65N)
 static struct gpiomux_setting nfc_pn544pn65n_ven_cfg = {
 	.func = GPIOMUX_FUNC_GPIO,
@@ -422,7 +419,6 @@ static struct gpiomux_setting nfc_pn544pn65n_firm_cfg = {
 	.dir = GPIOMUX_OUT_LOW,
 };
 #endif
-//20110315, seunghyup.ryoo@lge.com,  [END]
 
 #ifdef CONFIG_LGE_MHL_SII9244
 static struct gpiomux_setting mhl_detect_cfg = {
@@ -483,7 +479,6 @@ static struct msm_gpiomux_config msm8x60_gsbi_configs[] __initdata = {
 	{
 		.gpio      = 34,
 		.settings = {
-			//bill.jung@lge.com - WiFi Reset pin
 			//[GPIOMUX_SUSPENDED] = &spi_suspended_config,
 			//[GPIOMUX_ACTIVE]    = &spi_active,
 			[GPIOMUX_ACTIVE]    = &wifi_active,
@@ -519,7 +514,6 @@ static struct msm_gpiomux_config msm8x60_gsbi_configs[] __initdata = {
 			[GPIOMUX_ACTIVE]    = &i2c_active,
 		},
 	},			
-//20110315, seunghyup.ryoo@lge.com,  [START]
 #if defined(CONFIG_LGE_NFC_NXP_PN544PN65N)
 	{
 		.gpio      = 46,
@@ -528,7 +522,6 @@ static struct msm_gpiomux_config msm8x60_gsbi_configs[] __initdata = {
 		},
 	},
 #endif
-//20110315, seunghyup.ryoo@lge.com,  [END]
 	{
 		.gpio      = 47,
 		.settings = {
@@ -685,7 +678,6 @@ static struct msm_gpiomux_config msm8x60_gsbi_configs[] __initdata = {
 	},	
 };
 
-//20120105, seunghyup.ryoo@lge.com, Add GPIO for NFC PN544 [START]
 static struct msm_gpiomux_config msm8x60_ebi2_configs[] __initdata = {
 	{
 		.gpio      = 123,
@@ -708,7 +700,6 @@ static struct msm_gpiomux_config msm8x60_ebi2_configs[] __initdata = {
 		},
 	},
 };
-//20120105, seunghyup.ryoo@lge.com, Add GPIO for NFC PN544 [END]
 
 #if defined(CONFIG_USB_PEHCI_HCD) || defined(CONFIG_USB_PEHCI_HCD_MODULE)
 #endif
@@ -1303,9 +1294,7 @@ msm8x60_charm_gpiomux_cfgs[] __initdata = {
 	{msm8x60_charm_configs, ARRAY_SIZE(msm8x60_charm_configs)},
 #ifdef CONFIG_LGE_AUDIO
 	{msm8x60_audio_configs, ARRAY_SIZE(msm8x60_audio_configs)},
-//20120105, seunghyup.ryoo@lge.com, Add GPIO for NFC PN544 [START]
 	{msm8x60_ebi2_configs, ARRAY_SIZE(msm8x60_ebi2_configs)},
-//20120105, seunghyup.ryoo@lge.com, Add GPIO for NFC PN544 [END]
 #endif
 #ifdef CONFIG_LGE_PM_CURRENT_CONSUMPTION_FIX
 	{msm8x60_other_sleep_gpio_configs, ARRAY_SIZE(msm8x60_other_sleep_gpio_configs)},
